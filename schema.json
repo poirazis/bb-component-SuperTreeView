@@ -1,0 +1,178 @@
+{
+  "type": "component",
+  "metadata": {},
+  "schema": {
+    "name": "bb-component-SuperTreeView",
+    "friendlyName": "Super TreeView",
+    "description": "A TreeView Component for Budibase with Super Powers !",
+    "icon": "Breakdown",
+    "hasChildren": true,
+    "styles": [
+      "padding",
+      "background",
+      "border",
+      "shadow"
+    ],
+    "settings": [
+      {
+        "type": "text",
+        "key": "title",
+        "label": "Title"
+      },
+      {
+        "type": "select",
+        "key": "size",
+        "label": "Size",
+        "options": [
+          {"label": "Small", "value": "S"},
+          {"label": "Medium", "value": "M"},
+          {"label": "Large", "value": "L"},
+          {"label": "Extra Large", "value": "XL"}
+        ],
+        "defaultValue": "M"
+      },
+      {
+        "type": "select",
+        "key": "width",
+        "label": "Width",
+        "options": [
+          {"label": "Normal", "value": "250px"},
+          {"label": "Wide", "value": "500px"},
+          {"label": "Full", "value": "100%"}
+        ],
+        "defaultValue": "250px"
+      },
+      {
+        "type": "boolean",
+        "key": "selectable",
+        "label": "Selectable"
+      },
+      {
+        "section": true,
+        "name": "Node Settings",
+        "settings": [
+          {
+            "type": "dataProvider",
+            "label": "Provider",
+            "key": "dataProvider"
+          },
+          {
+            "type": "field",
+            "label": "Node Key Column",
+            "key": "nodeIDColumn",
+            "required": true
+          },
+          {
+            "type": "field",
+            "label": "Node Label Column",
+            "key": "nodeValueColumn"
+          },
+          {
+            "type": "icon",
+            "key": "nodeIcon",
+            "label": "Node Icon"
+          }
+        ]
+      }, 
+      {
+        "section": true,
+        "name": "Items Settings",
+        "settings": [
+          {
+            "type": "select",
+            "label": "Item source",
+            "key": "itemSource",
+            "defaultValue": "schema",
+            "placeholder": "Pick an items source",
+            "options": [
+              {
+                "label": "Schema",
+                "value": "schema"
+              },
+              {
+                "label": "Data provider",
+                "value": "provider"
+              },
+              {
+                "label": "Custom",
+                "value": "custom"
+              }
+            ]
+          },
+          {
+            "type": "field",
+            "label": "Items Field",
+            "key": "itemRelColumn",
+            "dependsOn": {
+              "setting": "itemSource",
+              "value": "schema"
+            },
+            "info": "Must be a Relationship or Multi-Select field"
+          },
+          {
+            "type": "dataProvider",
+            "label": "Item Provider",
+            "key": "itemDataProvider",
+            "required": true,
+            "dependsOn": {
+              "setting": "itemSource",
+              "value": "provider"
+            }
+          },
+          {
+            "type": "field",
+            "label": "Item Key Column",
+            "key": "itemIDColumn",
+            "dependsOn": {
+              "setting": "itemSource",
+              "value": "provider"
+            }
+          },
+          {
+            "type": "field",
+            "label": "Item Label Column",
+            "key": "itemValueColumn",
+            "dependsOn": {
+              "setting": "itemSource",
+              "value": "provider"
+            }
+          },
+          {
+            "type": "options",
+            "key": "customItems",
+            "dependsOn": {
+              "setting": "itemSource",
+              "value": "custom"
+            }
+          },
+          {
+            "type": "icon",
+            "key": "itemIcon",
+            "label": "Item Icon"
+          }
+        ]
+      }, 
+      {
+        "section": true,
+        "name": "On Node Click",
+        "settings": [
+          {
+            "type": "event",
+            "key": "onNodeClick",
+            "context": [
+              {
+                "label": "NodeType",
+                "key": "nodeType"
+              },
+              {
+                "label": "SelectedItems",
+                "key": "selectedItems",
+                "type": "array"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
