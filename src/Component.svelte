@@ -69,9 +69,10 @@
     ? new Array(dataProvider?.limit > 20 ? 20 : dataProvider?.limit).fill({})
     : dataProvider?.rows
 
-  $: _isColumnEnumerable = ( dataProvider?.schema[itemRelColumn]?.type === "link" || dataProvider?.schema[itemRelColumn]?.type === "array" )
+  $: _isColumnEnumerable = ( dataProvider?.schema ) ? ( dataProvider?.schema[itemRelColumn]?.type === "link" || dataProvider?.schema[itemRelColumn]?.type === "array" ) : false
   $: settings = { selectable : selectable, 
-                  itemSource : itemSource }
+                  itemSource : itemSource, 
+                  itemRelColumn: itemRelColumn }
 </script>
 
 <div use:styleable={$component.styles}>
@@ -82,7 +83,7 @@
     <ul
     class:spectrum-TreeView--standalone={standalone}
     class:spectrum-TreeView--quiet={quiet}
-    class="spectrum-TreeView spectrum-Treeview--size{size}"
+    class="spectrum-TreeView spectrum-TreeView--size{size}"
     style="width: {width}"
   >
 
@@ -95,7 +96,7 @@
         id={node[nodeIDColumn]} 
         icon={nodeIcon}
         {selectable}
-        title={node[nodeValueColumn] || "Set the Node Label Column"} 
+        title={node[nodeValueColumn] || "Set the Node Key & Label Columns"} 
         {size}
         onClick={onNodeClick}> 
           {#each populateItems(index) as item }
