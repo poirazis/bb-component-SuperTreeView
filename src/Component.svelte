@@ -1,9 +1,10 @@
 <script>
   import "../node_modules/@spectrum-css/treeview/dist/index-vars.css"
   
-  import Welcome from "./Welcome.svelte";
-  import TreeItem from "./TreeItem.svelte";
-  import { getContext } from "svelte"
+  import Welcome from "./lib/Welcome.svelte";
+  import TreeItem from "./lib/TreeItem.svelte";
+  import { getContext, setContext } from "svelte"
+  import { writable } from "svelte/store";
 
   const { styleable } = getContext("sdk")
   const component = getContext("component")
@@ -31,6 +32,10 @@
 
   export let onNodeClick
 
+  const selectedItems = writable([])
+  setContext("selectedItems", selectedItems)
+
+  // Dynamically generates Node items on each Node iterations
   function populateItems( nodeIndex ) {
     let _items = []
 
@@ -53,14 +58,12 @@
         });
       }
     } 
-    else if (itemSource === "custom" && customItems.length > 0)
+    else if (itemSource === "custom" && customItems?.length > 0)
     {
       _items = customItems?.map( v => { return {id: v.key, primaryDisplay: v.label} })  
     }  
-
     return _items;     
   }
-
 
   // If the parent DataProvider is loading, fill the rows array with a number of empty objects 
   // corresponding to the DataProvider's page size; 
@@ -77,53 +80,56 @@
 
 <div use:styleable={$component.styles}>
 
-{#key settings}
-    
-  {#if rows?.length > 0}
-    <ul
-    class:spectrum-TreeView--standalone={standalone}
-    class:spectrum-TreeView--quiet={quiet}
-    class="spectrum-TreeView spectrum-TreeView--size{size}"
-    style="width: {width}"
-  >
+  {#key settings}
+      
+    {#if rows?.length > 0}
+      <ul
+      class:spectrum-TreeView--standalone={standalone}
+      class:spectrum-TreeView--quiet={quiet}
+      class="spectrum-TreeView spectrum-TreeView--size{size}"
+      style="width: {width}"
+    >
 
-    {#if title !== "" }
-      <div class="spectrum-TreeView-heading"><span class="spectrum-TreeView-itemLabel">{title}</span></div>
+      {#if title !== "" }
+        <div class="spectrum-TreeView-heading">
+          <span class="spectrum-TreeView-itemLabel">{title.toUpperCase()}</span>
+        </div>
+      {/if}
+
+      {#each rows as node, index}
+        <TreeItem 
+          key={node[nodeIDColumn]} 
+          icon={nodeIcon}
+          {selectable}
+          title={node[nodeValueColumn] || "Set the Node Key & Label Columns"} 
+          {size}
+          onClick={onNodeClick}> 
+            {#each populateItems(index) as item }
+              <TreeItem 
+                {selectable} 
+                key={item.id} 
+                parentKey={node[nodeIDColumn]}
+                title={item.primaryDisplay} 
+                icon={itemIcon}
+                onClick={onNodeClick}></TreeItem>
+            {/each}      
+        </TreeItem>  
+      {/each}
+    </ul>
+    {:else}
+      <Welcome> <slot /> </Welcome>
     {/if}
 
-    {#each rows as node, index}
-      <TreeItem 
-        id={node[nodeIDColumn]} 
-        icon={nodeIcon}
-        {selectable}
-        title={node[nodeValueColumn] || "Set the Node Key & Label Columns"} 
-        {size}
-        onClick={onNodeClick}> 
-          {#each populateItems(index) as item }
-            <TreeItem 
-              {selectable} 
-              id={item.id} 
-              title={item.primaryDisplay} 
-              icon={itemIcon}
-              onClick={onNodeClick}></TreeItem>
-          {/each}      
-      </TreeItem>  
-    {/each}
-
-  </ul>
-  {:else}
-    <Welcome />
-  {/if}
-
-{/key}
-
+  {/key}
+  
 </div>
 
 <style>
-  .error {
-    position: relative;
-    border: 2px dotted red;
-    margin: 1rem;
-    padding: 0.5rem 1rem;
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+  .sideView {
+    flex-grow: 1 ;
   }
 </style>

@@ -1,4 +1,6 @@
 <script>
+    import { getContext } from "svelte";
+
     export let selectable
     export let selected = false
     export let open = false
@@ -7,28 +9,39 @@
     export let title
     export let icon 
     export let size
-    export let id = ""
+    export let key = ""
+    export let parentKey = null
 
-    let iconSize = "ri-sm"
-    $: id = sanitize(id)
-
-    // Clear the erroneous wrapping of id fields on relationships from DataProvider
-    function sanitize (input)
-    {
-      if (String(input).startsWith("%5B")) {
-        input = String(input).slice(3,-3);
-      }
-      return input
-    }
+    const selectedItems = getContext("selectedItems")
 
     function handleClick (event) {
       if ($$slots.default)
         open = !open
-      else 
+      else {
         selected = selectable ? !selected : false; 
+        notifyParent(selected)
+      }
 
-      if (onClick) onClick({ nodeType : " Items"});    
+      if (onClick) {  
+        onClick({ nodeType:nodeType, nodeKey:key, nodeValue: title, selectedItems: $selectedItems});
+      }
     }
+
+    function notifyParent ( selected ) {
+      if (selected) {
+        $selectedItems = [...$selectedItems, { nodeKey: key, nodeValue: title, parentKey: parentKey }]
+      } else {
+        selectedItems.update(state => {
+          const indx = state.findIndex(v => v.nodeKey === key && v.parentKey === parentKey);
+          state.splice(indx, indx >= 0 ? 1 : 0);
+          return state;
+        });
+      }
+    }
+
+    let iconSize = "ri-sm"
+    $: nodeType = parentKey ? "Item" : "Node"
+
   </script>
   
   <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -61,7 +74,7 @@
     </span>
 
     {#if $$slots.default}
-      <ul class="spectrum-TreeView spectrum-Treeview--size{size}">
+      <ul class="spectrum-TreeView spectrum-TreeView--size{size}">
         <slot />
       </ul>
     {/if}

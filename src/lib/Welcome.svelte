@@ -4,3 +4,4 @@
     <p> Please place the Super TreeView Component inside a Data Provider and set 
         the appropriate settings to get started! </p>
 </div>
+<slot />

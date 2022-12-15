@@ -6,7 +6,7 @@
     "friendlyName": "Super TreeView",
     "description": "A TreeView Component for Budibase with Super Powers !",
     "icon": "Breakdown",
-    "hasChildren": true,
+    "hasChildren": false,
     "styles": [
       "padding",
       "background",
@@ -37,7 +37,7 @@
         "label": "Width",
         "options": [
           {"label": "Normal", "value": "250px"},
-          {"label": "Wide", "value": "500px"},
+          {"label": "Wide", "value": "400px"},
           {"label": "Full", "value": "100%"}
         ],
         "defaultValue": "250px"
@@ -48,13 +48,20 @@
         "label": "Selectable"
       },
       {
+        "type": "boolean",
+        "key": "quiet",
+        "label": "Quiet", 
+        "dependsOn": "selectable"
+      },
+      {
         "section": true,
         "name": "Node Settings",
         "settings": [
           {
             "type": "dataProvider",
             "label": "Provider",
-            "key": "dataProvider"
+            "key": "dataProvider",
+            "required": true
           },
           {
             "type": "field",
@@ -65,7 +72,8 @@
           {
             "type": "field",
             "label": "Node Label Column",
-            "key": "nodeValueColumn"
+            "key": "nodeValueColumn",
+            "required": true
           },
           {
             "type": "icon",
@@ -163,6 +171,14 @@
               {
                 "label": "NodeType",
                 "key": "nodeType"
+              },
+              {
+                "label": "NodeKey",
+                "key": "nodeKey"
+              },
+              {
+                "label": "NodeValue",
+                "key": "nodeValue"
               },
               {
                 "label": "SelectedItems",
