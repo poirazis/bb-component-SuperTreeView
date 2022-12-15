@@ -31,12 +31,12 @@
     regenerator-runtime "^0.13.11"
 
 "@budibase/backend-core@^2.0.13":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@budibase/backend-core/-/backend-core-2.2.3.tgz#e2c3214bdbd6fa5cc95038816ecc40a9a0538be9"
-  integrity sha512-vGOWkQ8Xk6p6Lcvbtj6Z4UMoZoZlllMwmnWkwBbwr0am9bVFBF9k65Ca/vioA1egsvmM9hKCCQV6xeDcUz8qaQ==
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@budibase/backend-core/-/backend-core-2.2.6.tgz#9ee5a54176f90614b36d8b4fa5887d50674cc5f2"
+  integrity sha512-HdWcZAvO4tnr0nj6oBLf0EQe1MT1C25vYZwJk4IepzgZhl9thIeTWOiRvgHlLCNEn84pmE6/jzJGVPohPbpjqg==
   dependencies:
     "@budibase/nano" "10.1.1"
-    "@budibase/types" "^2.2.3"
+    "@budibase/types" "^2.2.6"
     "@shopify/jest-koa-mocks" "5.0.1"
     "@techpass/passport-openidconnect" "0.3.2"
     aws-sdk "2.1030.0"
@@ -79,10 +79,10 @@
     qs "^6.11.0"
     tough-cookie "^4.1.2"
 
-"@budibase/types@^2.2.3":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@budibase/types/-/types-2.2.3.tgz#81ecc4d04cf74698bcd7ea77cee226b0dfd9d949"
-  integrity sha512-+LnzJvxbsUtFnSvd9uki6N7OPwmqu4R8nLXuLzDJyknHVdrLgkAduv+0AZ6WIqjgl6ADVcvk48Et40s0wotZxw==
+"@budibase/types@^2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@budibase/types/-/types-2.2.6.tgz#308a7a5538035425d99611c78e5953b800450d9e"
+  integrity sha512-BYYKdyt//w3ZA05abYNwIDsFNQ+mFodXoI8d89xMe4YqfSbwF6mwMgKffhyAlLxPqAePBi1ncyl7KP5aPFdgVQ==
 
 "@crownframework/svelte-error-boundary@^1.0.3":
   version "1.0.3"
@@ -253,11 +253,6 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@sideway/pinpoint/-/pinpoint-2.0.0.tgz#cff8ffadc372ad29fd3f78277aeb29e632cc70df"
   integrity sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==
-
-"@spectrum-css/treeview@^6.0.21":
-  version "6.0.21"
-  resolved "https://registry.yarnpkg.com/@spectrum-css/treeview/-/treeview-6.0.21.tgz#cdd554825bb875aaaec068b98ec5e76728fb3091"
-  integrity sha512-fGgM0M/vPbuDE3EVFve8k7hOT1AdwQ9gFXfvJIPSEQZeOqQW7Anmd+TCvz4i4tdhvWl4nMSccGPbrz/7nKseOg==
 
 "@techpass/passport-openidconnect@0.3.2":
   version "0.3.2"

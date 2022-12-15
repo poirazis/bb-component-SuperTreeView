@@ -1,5 +1,5 @@
 <script>
-  import "../node_modules/@spectrum-css/treeview/dist/index-vars.css"
+//  import "../node_modules/@spectrum-css/treeview/dist/index-vars.css"
   
   import Welcome from "./lib/Welcome.svelte";
   import TreeItem from "./lib/TreeItem.svelte";
