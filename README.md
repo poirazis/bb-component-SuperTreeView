@@ -2,6 +2,9 @@
 The Super Treeview component allows you to create beatiful selectable Master Detail Treeviews.
 The component can render any Relationtship or Multi-Select (array) field as child items to parent Nodes.
 
+
+![Alt text](assets/preview.png)
+
 # Description
 A TreeView Component for Budibase with Super Powers !
 
